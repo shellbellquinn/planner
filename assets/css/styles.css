@@ -76,8 +76,8 @@
     border-bottom-right-radius: 15px;
 }
 
-.saveBtn:hover {
-    font-size: 19px;
+#icon:hover {
+    font-size: 40px;
     transition: all .2s ease-in-out;
 }
 
