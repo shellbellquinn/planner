@@ -44,7 +44,7 @@ $.each($(".time-block"), function (index, value) {
     }
 });
 
-//Check for local storage for set value to the object
+//Check for local storage to set value to the object
 let timeObject = {};
   if (localStorage.getItem('timeObject')) {
       timeObject = JSON.parse(localStorage.getItem('timeObject'));
@@ -61,4 +61,26 @@ let timeObject = {};
       '17':{ time: "17", value: ""}
     };
   }
-console.log(timeObject)
+
+//set value of timeObject to equal the user input for each row 
+$(".time-block").each(function(){
+   $(this).find(".textArea").val(timeObject[$(this).attr("data-time")].value);
+   //console.log(this)
+  });
+
+ //save value to local storage on click
+ $(".saveBtn").on('click', function(event){
+     //set timeObject time attribute
+     var timeValue = $(this).closest(".time-block").attr("data-time");
+    //set timeObject value attribute
+     var textValue = $(this).closest(".time-block").find(".textArea").val();
+     timeObject[timeValue].value = textValue;
+
+  //save user input in each object to local storage
+     localStorage.setItem('timeObject', JSON.stringify(timeObject));
+
+      //console.log(textValue)
+
+ });
+
+
