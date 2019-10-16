@@ -11,24 +11,23 @@ for (var hour = 9; hour < 18; hour++) {
     }).format('h  a'));
     $('.container').append(`<div class="row time-block" data-time="${hour}"> 
 
-       <!--//hour column//-->
+       <!--hour column-->
            <div class="col-sm col-md-2 hour"> 
              <p class=dayHour>${moment({hour}).format('h  a')}</p>
            </div> 
            
-      
-       <!--//user input text area//-->
+       <!--user input text area-->
            <div class="col-sm col-md-8 d-flex description"> 
              <textarea class=textArea></textarea> 
            </div> 
       
-       <!--//bootstrap saveBtn//-->
+       <!--bootstrap saveBtn-->
            <div class="col-sm col-md-2 saveBtn">
            <i class="far fa-save fa-2x" id=icon></i>  
            </div>`);
-    console.log({
-        hour
-    });
+  //  console.log({
+  //      hour
+  //  });
 }
 
 
@@ -45,6 +44,21 @@ $.each($(".time-block"), function (index, value) {
     }
 });
 
-//Check for local storage to set the text in text area
-
-//Save on click to local storage
+//Check for local storage for set value to the object
+let timeObject = {};
+  if (localStorage.getItem('timeObject')) {
+      timeObject = JSON.parse(localStorage.getItem('timeObject'));
+  }else{
+    timeObject = {
+      '9': { time: "9", value: ""},
+      '10':{ time: "10", value: ""},
+      '11':{ time: "11", value: ""},
+      '12':{ time: "12", value: ""},
+      '13':{ time: "13", value: ""},
+      '14':{ time: "14", value: ""},
+      '15':{ time: "15", value: ""},
+      '16':{ time: "16", value: ""},
+      '17':{ time: "17", value: ""}
+    };
+  }
+console.log(timeObject)
