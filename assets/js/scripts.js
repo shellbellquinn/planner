@@ -86,5 +86,3 @@ $(".time-block").each(function(){
  });
  
 });
-
-
