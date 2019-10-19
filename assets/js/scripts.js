@@ -11,20 +11,20 @@ for (var hour = 9; hour < 18; hour++) {
     scheduledHours.push(moment({
         hour
     }).format('h  a'));
-    $('.container').append(`<div class="row time-block" data-time="${hour}"> 
+    $('.container').append(`<div class="row time-block" data-time=${hour}> 
 
        <!--hour column-->
-           <div class="col-sm col-md-2 hour"> 
+           <div class="col-sm col-md-2 hour" data-time=${hour}> 
              <p class=dayHour>${moment({hour}).format('h  a')}</p>
            </div> 
            
        <!--user input text area-->
-           <div class="col-sm col-md-8 d-flex description"> 
+           <div class="col-sm col-md-8 d-flex description" data-time=${hour}> 
              <textarea class=textArea></textarea> 
            </div> 
       
        <!--bootstrap saveBtn-->
-           <div class="col-sm col-md-2 saveBtn">
+           <div class="col-sm col-md-2 saveBtn" data-time=${hour}>
            <i class="far fa-save fa-2x" id=icon></i>  
            </div>`);
   //  console.log({
@@ -65,17 +65,19 @@ let timeObject = {};
   }
 
 //set value of timeObject to equal the user input for each row 
-$(".time-block").each(function(){
+$(".description").each(function(){
    $(this).find(".textArea").val(timeObject[$(this).attr("data-time")].value);
    //console.log(this)
   });
 
  //save value to local storage on click
- $(".saveBtn").on('click', function(event){
+ $(document).on('click', '.saveBtn', function(event){
+   var data = $(this).attr("data-time") 
+    console.log('alert' + data);
      //set timeObject time attribute
-     var timeValue = $(this).closest(".time-block").attr("data-time");
+     var timeValue = $(this).attr("data-time");
     //set timeObject value attribute
-     var textValue = $(this).closest(".time-block").find(".textArea").val();
+     var textValue = $(".time-block").find(".textArea").val();
      timeObject[timeValue].value = textValue;
 
   //save user input in each object to local storage
